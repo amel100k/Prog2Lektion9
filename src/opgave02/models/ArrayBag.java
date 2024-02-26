@@ -6,6 +6,7 @@ public class ArrayBag<E> implements Bag<E> {
     // current number of items in the bag,
     // items are at index 0..size-1
     private int size;
+    private E[] items2;
 
     /** Create a bag with the given capacity. */
     public ArrayBag(int capacity) {
@@ -37,42 +38,74 @@ public class ArrayBag<E> implements Bag<E> {
 
     @Override
     public boolean add(E newEntry) {
-        // TODO
-        return false;
+        boolean isAdded = false;
+        if (size < items.length){
+            items[size] = newEntry;
+            size++;
+            isAdded = true;
+        }
+        return isAdded;
     }
 
     @Override
     public E remove() {
         // TODO
+        if (size < items.length){
+            items[size] = null;
+            return items[size];
+        }
         return null;
     }
 
     @Override
     public boolean remove(E anEntry) {
-        // TODO
-        return false;
+        boolean isRemoved = false;
+        for (E item : items) {
+            if (item == anEntry) {
+                items[size] = null;
+                isRemoved = true;
+                break;
+            }
+        }
+        return isRemoved;
     }
+
 
     @Override
     public void clear() {
-        // TODO
+        size = 0;
     }
 
     @Override
     public int getFrequencyOf(E anEntry) {
-        // TODO
-        return 0;
+        int count = 0;
+        for (E item : items) {
+            if (item == anEntry){
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
     public boolean contains(E anEntry) {
-        // TODO
-        return false;
+        boolean doesContain = false;
+        for (E item : items) {
+            if (item == anEntry) {
+                doesContain = true;
+                break;
+            }
+        }
+        return doesContain;
     }
 
     @Override
     public E[] toArray() {
-        // TODO
-        return null;
+        for (E item : items) {
+        if (size < items2.length){
+            items2[size] = item;
+        }
+        }
+        return items2;
     }
 }
